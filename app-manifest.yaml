@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-sip-python
+  name: deployment-$(Build.Repository.Name)
 spec:
   selector:
     matchLabels:
-      app: sip-python
+      app: $(Build.Repository.Name)
   replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
-        app: sip-python 
+        app: $(Build.Repository.Name)
     spec:
       containers:
-      - name: sip-python
+      - name: $(Build.Repository.Name)
         #image: sip-python
-        image: $(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/siphiwemsibiaws-docker-eks1:$(Build.BuildNumber)
+        image: $(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)
         ports:
         - containerPort: 80
