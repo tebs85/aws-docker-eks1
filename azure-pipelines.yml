@@ -105,29 +105,6 @@ stages:
       #     secretType: 'dockerRegistry'
       #     containerRegistryType: 'Container Registry'
 
-      # - task: Kubernetes@1
-      #   inputs:
-      #     connectionType: 'Kubernetes Service Connection'
-      #     kubernetesServiceEndpoint: 'Tebogo-EKS'
-      #     command: 'apply'
-      #     useConfigurationFile: true
-      #     configuration: '$(System.ArtifactsDirectory)/drop/app-manifest.yaml'
-      #     secretType: 'dockerRegistry'
-      #     containerRegistryType: 'Container Registry'
-      #     dockerRegistryEndpoint: 'tebogo-aws-ecr'
-      #     secretName: 'default'
-
-      # - task: Kubernetes@1
-      #   inputs:
-      #     connectionType: 'Kubernetes Service Connection'
-      #     kubernetesServiceEndpoint: 'Tebogo-EKS'
-      #     command: 'set'
-      #     arguments: 'image deployments/deployment-tebs-python tebs-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
-      #     secretType: 'dockerRegistry'
-      #     containerRegistryType: 'Container Registry'
-      #     dockerRegistryEndpoint: 'tebogo-aws-ecr'
-      #     secretName: 'default'
-      
       - task: Kubernetes@1
         inputs:
           connectionType: 'Kubernetes Service Connection'
@@ -137,8 +114,10 @@ stages:
           configuration: '$(System.ArtifactsDirectory)/drop/app-manifest.yaml'
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
+          dockerRegistryEndpoint: 'tebogo-aws-ecr'
+          secretName: 'default'
           forceUpdate: false
-      
+
       - task: Kubernetes@1
         inputs:
           connectionType: 'Kubernetes Service Connection'
@@ -147,4 +126,6 @@ stages:
           arguments: 'image deployments/deployment-tebs-python tebs-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
+          dockerRegistryEndpoint: 'tebogo-aws-ecr'
+          secretName: 'default'
           forceUpdate: false
