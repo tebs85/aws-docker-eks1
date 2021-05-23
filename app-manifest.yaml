@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-$(Build.Repository.Name)
+  name: deployment-tebs-python
 spec:
   selector:
     matchLabels:
-      app: $(Build.Repository.Name)
+      app: tebs-python
   replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
-        app: $(Build.Repository.Name)
+        app: tebs-python
     spec:
       containers:
-      - name: $(Build.Repository.Name)
+      - name: tebs-python
         #image: sip-python
         image: $(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)
         ports:
