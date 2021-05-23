@@ -115,7 +115,7 @@ stages:
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
           dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          # secretName: 'azure-devops-pipelines-token-bjsz5'
+          secretName: 'azure-devops-pipelines-token-bjsz5'
           forceUpdate: false
 
       - task: Kubernetes@1
@@ -127,5 +127,5 @@ stages:
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
           dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          # secretName: 'azure-devops-pipelines-token-bjsz5'
+          secretName: 'azure-devops-pipelines-token-bjsz5'
           forceUpdate: false
