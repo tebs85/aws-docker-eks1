@@ -101,7 +101,7 @@ stages:
           connectionType: 'Kubernetes Service Connection'
           kubernetesServiceEndpoint: 'Tebogo-EKS'
           command: 'set'
-          arguments: 'image deployments/deployment-$(Build.Repository.Name) $(Build.Repository.Name)=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
+          arguments: 'image deployments/deployment-tebs-python tebs-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
           secretType: 'dockerRegistry'
           containerRegistryType: 'Azure Container Registry'
 
