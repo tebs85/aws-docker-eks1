@@ -115,7 +115,7 @@ stages:
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
           dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          secretName: 'default'
+          secretName: 'default-token-zp492'
           forceUpdate: false
 
       - task: Kubernetes@1
@@ -127,5 +127,5 @@ stages:
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
           dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          secretName: 'default'
+          secretName: 'default-token-zp492'
           forceUpdate: false
