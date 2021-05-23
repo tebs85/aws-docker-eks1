@@ -101,7 +101,7 @@ stages:
           connectionType: 'Kubernetes Service Connection'
           kubernetesServiceEndpoint: 'AWS-EKS1'
           command: 'set'
-          arguments: 'image deployments/deployment-sip-python sip-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/siphiwemsibiaws-docker-eks1:$(Build.BuildNumber)'
+          arguments: 'image deployments/deployment-$(Build.Repository.Name) sip-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
           secretType: 'dockerRegistry'
           containerRegistryType: 'Azure Container Registry'
 
