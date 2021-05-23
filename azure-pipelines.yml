@@ -84,6 +84,12 @@ stages:
           artifactName: 'drop'
           downloadPath: '$(System.ArtifactsDirectory)'
 
+      - task: AWSShellScript@1
+        inputs:
+          awsCredentials: 'TebogoAWS'
+          regionName: 'eu-west-1'
+          scriptType: 'inline'
+          inlineScript: 'aws eks update-kubeconfig --name extravagant-party-1621789142 --region $(AWS_REGION)'
       - task: Kubernetes@1
         displayName: Kubectl apply
         inputs:
