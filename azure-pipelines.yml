@@ -114,8 +114,8 @@ stages:
           configuration: '$(System.ArtifactsDirectory)/drop/app-manifest.yaml'
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
-          dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          secretName: 'azure-devops-pipelines-token-bjsz4'
+          # dockerRegistryEndpoint: 'tebogo-aws-ecr'
+          # secretName: 'azure-devops-pipelines-token-bjsz4'
 
       - task: Kubernetes@1
         inputs:
@@ -125,5 +125,5 @@ stages:
           arguments: 'image deployments/deployment-tebs-python tebs-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
-          dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          secretName: 'azure-devops-pipelines-token-bjsz4'
+          # dockerRegistryEndpoint: 'tebogo-aws-ecr'
+          # secretName: 'azure-devops-pipelines-token-bjsz4'
