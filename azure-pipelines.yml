@@ -24,7 +24,7 @@ stages:
     - task: AWSShellScript@1
       displayName: Build and tag an image using the Dockerfile
       inputs:
-        awsCredentials: 'AWS-Connection-1'
+        awsCredentials: 'TebogoAWS'
         regionName: '$(AWS_REGION)'
         scriptType: 'inline'
         inlineScript: |
@@ -41,7 +41,7 @@ stages:
     - task: ECRPushImage@1
       displayName: Push the image to the AWS ECR
       inputs:
-        awsCredentials: 'AWS-Connection-1'
+        awsCredentials: 'TebogoAWS'
         regionName: '$(AWS_Region)'
         imageSource: 'imagename'
         sourceImageName: '$(Build.Repository.Name)'
@@ -88,7 +88,7 @@ stages:
         displayName: Kubectl apply
         inputs:
           connectionType: 'Kubernetes Service Connection'
-          kubernetesServiceEndpoint: 'AWS-EKS1'
+          kubernetesServiceEndpoint: 'Tebogo-EKS'
           command: 'apply'
           useConfigurationFile: true
           configuration: '$(System.ArtifactsDirectory)/drop/app-manifest.yaml'
@@ -99,7 +99,7 @@ stages:
         displayName: Kubectl set
         inputs:
           connectionType: 'Kubernetes Service Connection'
-          kubernetesServiceEndpoint: 'AWS-EKS1'
+          kubernetesServiceEndpoint: 'Tebogo-EKS'
           command: 'set'
           arguments: 'image deployments/deployment-$(Build.Repository.Name) sip-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
           secretType: 'dockerRegistry'
