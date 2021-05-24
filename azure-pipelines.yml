@@ -89,7 +89,15 @@ stages:
           awsCredentials: 'TebogoAWS'
           regionName: 'eu-west-1'
           scriptType: 'inline'
-          inlineScript: 'aws eks update-kubeconfig --name extravagant-party-1621789142 --region $(AWS_REGION)'
+          inlineScript: |
+            # Login to control plane and deploy
+
+            aws eks update-kubeconfig --name extravagant-party-1621789142 --region $(AWS_REGION)
+
+            kubectl apply -f $(System.ArtifactsDirectory)/drop/app-manifest.yaml
+            
+            kubectl set image deployments/deployment-tebs-python tebs-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)
+
       - task: Kubernetes@1
         displayName: Kubectl apply
         inputs:
@@ -111,25 +119,3 @@ stages:
           secretType: 'dockerRegistry'
           containerRegistryType: 'Container Registry'
 
-      # - task: Kubernetes@1
-      #   inputs:
-      #     connectionType: 'Kubernetes Service Connection'
-      #     kubernetesServiceEndpoint: 'Tebogo-EKS'
-      #     command: 'apply'
-      #     useConfigurationFile: true
-      #     configuration: '$(System.ArtifactsDirectory)/drop/app-manifest.yaml'
-      #     secretType: 'dockerRegistry'
-      #     containerRegistryType: 'Container Registry'
-          # dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          # secretName: 'azure-devops-pipelines-token-bjsz4'
-
-      # - task: Kubernetes@1
-      #   inputs:
-      #     connectionType: 'Kubernetes Service Connection'
-      #     kubernetesServiceEndpoint: 'Tebogo-EKS'
-      #     command: 'set'
-      #     arguments: 'image deployments/deployment-tebs-python tebs-python=$(ECR_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(Build.Repository.Name):$(Build.BuildNumber)'
-      #     secretType: 'dockerRegistry'
-      #     containerRegistryType: 'Container Registry'
-          # dockerRegistryEndpoint: 'tebogo-aws-ecr'
-          # secretName: 'azure-devops-pipelines-token-bjsz4'
